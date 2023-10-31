@@ -1,0 +1,24 @@
+{
+  "name": "next-unprefixed-intl",
+  "version": "1.0.0",
+  "description": "unprefixed-intl wrapper for Next.js",
+  "main": "src/index.ts",
+  "repository": "https://github.com/PetalFan/next-unprefixed-intl.git",
+  "author": "PetalFan",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "@types/node": "^18.0.0",
+    "next": "^13.0.0",
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "intl",
+    "internationalization",
+    "localization",
+    "translate",
+    "translation",
+    "next",
+    "next.js"
+  ]
+}
