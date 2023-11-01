@@ -13,7 +13,7 @@ the translations will be read on the server side, in the example of this README 
 Add an `unprefixed-intl.config.json` file to the project root:
 ```json
 {
-  "messagesPath": "./src/messages",
+  "messagesPath": "/src/messages",
   "defaultLang": "en",
   "maxAcceptedLanguageSearch": 3,
   "allowLanguageCode": true
@@ -38,7 +38,7 @@ interface Config{
 
 Add the translation files inside the `messagesPath` directory:
 
-`en` language example: `./src/messages/en.json`
+`en` language example: `/src/messages/en.json`
 ```json
 {
   "Home.component1": {
@@ -50,7 +50,7 @@ Add the translation files inside the `messagesPath` directory:
   }
 }
 ```
-`es` language example: `./src/messages/es.json`
+`es` language example: `/src/messages/es.json`
 ```json
 {
   "Home.component1": {
@@ -62,7 +62,7 @@ Add the translation files inside the `messagesPath` directory:
   }
 }
 ```
-`en-GB` language example: `./src/messages/en-GB.json`
+`en-GB` language example: `/src/messages/en-GB.json`
 ```json
 {
   "Home.component1": {
@@ -78,7 +78,7 @@ Add the translation files inside the `messagesPath` directory:
 # In the place you want to read the translations:
 this example is using Next.js, but it can be in any Node.js project if you use [the original package](https://www.npmjs.com/package/unprefixed-intl/):
 
-`./src/app/page.tsx`
+`/src/app/page.tsx`
 ```typescript jsx
 
 import { getTranslations } from "next-unprefixed-intl"
@@ -96,4 +96,15 @@ export default function Home() {
         <p>{t("hello_message")}</p>
     )
 }
+```
+
+# In addition
+You can use `bestAvailableOption` to read the preferred language, in this example the preferred language will be used to change the html language
+```typescript jsx
+
+import { bestAvailableOption } from "next-unprefixed-intl"
+
+...
+<html lang={bestAvailableOption()}>
+...
 ```

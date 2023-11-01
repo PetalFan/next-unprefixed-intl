@@ -9,10 +9,11 @@ type JsonType = {
         [key: string]: string;
     }
 }
-fs.readdirSync(config.messagesPath)
+const messagesFolderPath = process.cwd()+"/"+config.messagesPath+"/"
+fs.readdirSync(messagesFolderPath)
     .filter(filename => path.extname(filename) === '.json')
     .forEach(filename => {
-        const filePath = path.join(config.messagesPath, filename);
+        const filePath = messagesFolderPath + filename;
         const fileContent = fs.readFileSync(filePath, 'utf-8');
         const data = JSON.parse(fileContent) as JsonType;
 
@@ -74,12 +75,15 @@ export function bestAvailableOption(acceptLanguages?:string[]):string{
  */
 export function getTranslations(path:string,acceptLanguages?:string[]):(subPath:string)=>string{
     const innerMap = translationsMap.get(bestAvailableOption(acceptLanguages))
-    if (innerMap.has(path)){
+    if (innerMap){
         const values = innerMap.get(path);
-        return (subPath:string)=>{
-            if (values.has(subPath))
-                return values.get(subPath);
-            return path+"."+subPath
+        if (values) {
+            return (subPath: string) => {
+                const value = values.get(subPath);
+                if (value)
+                    return value;
+                return path + "." + subPath
+            }
         }
     }
     return (subPath:string)=>{
